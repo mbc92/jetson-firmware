@@ -1,13 +1,17 @@
-require recipes-core/images/core-image-minimal.bb
+require recipes-core/images/core-image-base.bb
+
+DISTRO_FEATURES:append = " systemd network-manager"
+VIRTUAL-RUNTIME_init_manager = "systemd"
 
 IMAGE_INSTALL += "\
     networkmanager \
-    openssh-sftp-server \
     openssh \
+    openssh-sftp-server \
+    vim \
+    networkmanager-config \
+    kernel-modules \
+    linux-firmware-ath9k\ 
+    htop \
 "
 
-DISTRO_FEATURES:append = " systemd"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-
-SYSTEMD_SERVICE_${PN} += "sshd.service"
-SYSTEMD_AUTO_ENABLE += "NetworkManager.service"
+SYSTEMD_AUTO_ENABLE += "sshd.service NetworkManager.service"
