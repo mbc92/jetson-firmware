@@ -13,6 +13,8 @@ IMAGE_INSTALL += "\
     linux-firmware-ath9k\ 
     htop \
     wifi-config \
+    ros-core \ 
+    ros-base \
 "
 
 SYSTEMD_AUTO_ENABLE += "sshd.service NetworkManager.service"
