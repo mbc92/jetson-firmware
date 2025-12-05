@@ -4,3 +4,6 @@
 [submodule "meta-tegra"]
 	path = meta-tegra
 	url = https://github.com/OE4T/meta-tegra.git
+[submodule "meta-ros"]
+	path = meta-ros
+	url = https://github.com/ros/meta-ros.git

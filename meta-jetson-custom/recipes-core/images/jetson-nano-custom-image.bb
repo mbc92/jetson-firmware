@@ -12,6 +12,13 @@ IMAGE_INSTALL += "\
     kernel-modules \
     linux-firmware-ath9k\ 
     htop \
+    wifi-config \
 "
 
 SYSTEMD_AUTO_ENABLE += "sshd.service NetworkManager.service"
+
+ROOTFS_POSTPROCESS_COMMAND += "update_extlinux_conf;"
+
+update_extlinux_conf() {
+    sed -i 's|root=[^ ]*|root=/dev/mmcblk0p1|' ${IMAGE_ROOTFS}/boot/extlinux/extlinux.conf
+}
