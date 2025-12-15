@@ -12,7 +12,6 @@ IMAGE_INSTALL += "\
     kernel-modules \
     linux-firmware-ath9k\ 
     htop \
-    wifi-config \
     ros-core \ 
     ros-base \
 "

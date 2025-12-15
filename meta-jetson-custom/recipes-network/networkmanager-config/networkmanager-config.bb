@@ -1,11 +1,11 @@
-SUMMARY = "NetworkManager configuration to manage all interfaces"
-LICENSE = "CLOSED"
-
-SRC_URI = "file://NetworkManager.conf"
+SUMMARY = "Default WiFi connection"
+LICENSE = "MIT"
+SRC_URI = "file://default-wifi.nmconnection"
 
 do_install() {
-    install -d ${D}${sysconfdir}/NetworkManager
-    install -m 0644 ${WORKDIR}/NetworkManager.conf ${D}${sysconfdir}/NetworkManager/NetworkManager.conf
+    install -d ${D}/etc/NetworkManager/system-connections
+    install -m 600 ${WORKDIR}/default-wifi.nmconnection \
+        ${D}/etc/NetworkManager/system-connections/
 }
 
-FILES_${PN} += "${sysconfdir}/NetworkManager/NetworkManager.conf"
+FILES:${PN} += "/etc/NetworkManager/system-connections/default-wifi.nmconnection"
