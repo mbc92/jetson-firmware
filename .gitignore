@@ -1,6 +1,5 @@
 yocto-image/
 workdir/
-poky/
 jetson-nano-build/cache
 jetson-nano-build/downloads
 jetson-nano-build/sstate-cache
