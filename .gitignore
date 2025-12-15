@@ -4,4 +4,5 @@ poky/
 jetson-nano-build/cache
 jetson-nano-build/downloads
 jetson-nano-build/sstate-cache
-jetson-nano-build/tmp
+jetson-nano-build/tmp-glibc
+jetson-nano-build/bitbake-cookerdaemon
