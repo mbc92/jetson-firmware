@@ -7,3 +7,7 @@
 [submodule "meta-ros"]
 	path = meta-ros
 	url = https://github.com/ros/meta-ros.git
+[submodule "poky"]
+	path = poky
+	url = https://git.yoctoproject.org/poky
+	branch = kirkstone
