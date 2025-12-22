@@ -1,7 +1,8 @@
 require recipes-core/images/core-image-base.bb
 
-DISTRO_FEATURES:append = " systemd network-manager"
+DISTRO_FEATURES:append = "systemd networkmanager wifi"
 VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_wpa-supplicant = ""
 
 IMAGE_INSTALL += "\
     networkmanager \
@@ -10,9 +11,9 @@ IMAGE_INSTALL += "\
     vim \
     networkmanager-config \
     kernel-modules \
-    linux-firmware-ath9k\ 
+    linux-firmware-ath9k \
     htop \
-    ros-core \ 
+    ros-core \
     ros-base \
 "
 

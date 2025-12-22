@@ -1,7 +1,7 @@
 [connection]
-id=mcwifi
+id=default-wifi
+uuid=c7d3f7f0-bef1-461a-bb78-7bc499ce8dfb
 type=wifi
-interface-name=wlan0
 autoconnect=true
 
 [wifi]
