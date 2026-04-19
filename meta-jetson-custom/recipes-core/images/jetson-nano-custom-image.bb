@@ -2,7 +2,10 @@ require recipes-core/images/core-image-base.bb
 
 VIRTUAL-RUNTIME_wpa-supplicant = ""
 
-
+TOOLCHAIN_TARGET_TASK += " \
+    gstreamer1.0-dev \
+    gstreamer1.0-plugins-base-dev \
+"
 
 IMAGE_INSTALL += "\
     networkmanager \
@@ -23,8 +26,6 @@ IMAGE_INSTALL += "\
     tensorrt-plugins \
     tensorrt-trtexec \
 "
-
-IMAGE_ROOTFS_SIZE = "2097152"
 
 SYSTEMD_AUTO_ENABLE += "sshd.service NetworkManager.service"
 
