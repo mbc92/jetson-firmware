@@ -5,3 +5,4 @@ jetson-nano-build/downloads
 jetson-nano-build/sstate-cache
 jetson-nano-build/tmp-glibc
 jetson-nano-build/bitbake-cookerdaemon
+jetson-nano-build/*
