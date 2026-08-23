@@ -1,30 +1,9 @@
 require recipes-core/images/core-image-base.bb
 
-VIRTUAL-RUNTIME_wpa-supplicant = ""
-
-TOOLCHAIN_TARGET_TASK += " \
-    gstreamer1.0-dev \
-    gstreamer1.0-plugins-base-dev \
-"
-
 IMAGE_INSTALL += "\
-    networkmanager \
-    openssh \
-    openssh-sftp-server \
-    vim \
-    networkmanager-config \
-    kernel-modules \
-    linux-firmware-ath9k \
-    htop \
-    gstreamer1.0 \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-tegra \
-    gstreamer1.0-rtsp-server \
-    v4l-utils \
-    rt-tests \
-    tensorrt-core \
-    tensorrt-plugins \
-    tensorrt-trtexec \
+    packagegroup-core \
+    packagegroup-multimedia \
+    packagegroup-tensorrt \
 "
 
 SYSTEMD_AUTO_ENABLE += "sshd.service NetworkManager.service"
@@ -37,6 +16,7 @@ update_extlinux_conf() {
 
     # Force root device (replace first occurrence only)
     sed -i '0,/root=[^ ]*/s||root=/dev/mmcblk0p1|' "$CONF"
+    sed -i '/APPEND / s|$| console=ttyTHS1,115200n8|' "$CONF"
 
     # Add CPU isolation parameters if not present
     if ! grep -q "isolcpus=" "$CONF"; then

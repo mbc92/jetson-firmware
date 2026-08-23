@@ -4,6 +4,7 @@ LICENSE = "CLOSED"
 SRC_URI = " \
     file://default-wifi.nmconnection \
     file://10-unmanaged-eth0.conf \
+    file://NetworkManager.conf \
 "
 
 S = "${WORKDIR}"
@@ -16,6 +17,9 @@ do_install() {
     install -d ${D}${sysconfdir}/NetworkManager/conf.d
     install -m 0644 ${WORKDIR}/10-unmanaged-eth0.conf \
         ${D}${sysconfdir}/NetworkManager/conf.d/
+
+    install -m 0644 ${WORKDIR}/NetworkManager.conf \
+        ${D}${sysconfdir}/NetworkManager/NetworkManager.conf
 }
 
 FILES:${PN} += " \

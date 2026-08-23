@@ -1,11 +1,15 @@
 #!/bin/bash
 
-set -e
-
 BOARD="$1"
+DISTRO="$2"
 
 if [ -z "$BOARD" ]; then
-    echo "Usage: source setup-env.sh <jetson-nano|rpi|nxp>"
+    echo "Usage: source setup-env.sh <jetson-nano|rpi|nxp> <distro>"
+    return 1
+fi
+
+if [ -z "$DISTRO" ]; then
+    echo "Usage: source setup-env.sh <compute> <distro>"
     return 1
 fi
 
@@ -30,16 +34,31 @@ case "$BOARD" in
 esac
 
 echo "=== Yocto Setup ==="
-echo "Board: $BOARD"
+echo "Board:  $BOARD"
 echo "Machine: $MACHINE"
+echo "Distro: $DISTRO"
 echo "Build dir: $BUILD_DIR"
 
 # Initialize Yocto environment
-source poky/oe-init-build-env "$BUILD_DIR"
+source poky/oe-init-build-env "$BUILD_DIR" || {
+    echo "ERROR: Failed to initialize Yocto environment"
+    return 1
+}
 
-# Inject MACHINE safely (only if not already set)
-if ! grep -q "^MACHINE" conf/local.conf; then
+# Set MACHINE if not already configured
+if ! grep -qE '^[[:space:]]*MACHINE[[:space:]]*=' conf/local.conf; then
     echo "MACHINE ?= \"$MACHINE\"" >> conf/local.conf
 fi
 
-echo "✔ Environment ready for $BOARD"
+# Always set DISTRO
+if grep -qE '^[[:space:]]*DISTRO[[:space:]]*=' conf/local.conf; then
+    sed -i -E "s|^[[:space:]]*DISTRO[[:space:]]*=.*|DISTRO = \"$DISTRO\"|" conf/local.conf
+else
+    echo "DISTRO = \"$DISTRO\"" >> conf/local.conf
+fi
+
+
+echo "✔ Environment ready"
+echo "  Board:   $BOARD"
+echo "  MACHINE: $MACHINE"
+echo "  DISTRO:  $DISTRO"
