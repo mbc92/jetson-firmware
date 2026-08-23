@@ -1,0 +1,11 @@
+[Unit]
+Description=Disable Ethernet eth0 at boot in order for WLAN to work.
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ifconfig eth0 down
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
